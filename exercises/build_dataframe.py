@@ -27,7 +27,7 @@ class DataframeBuilder:
 		temp_df = temp_df.rename(columns={column: symbol})
 		self.dataframe = self.dataframe.join(temp_df, how='inner')
 
-date_range = ['01/01/2015', '01/01/2018']
+date_range = ['01/01/2015', '01/16/2018']
 datasets = ['SGOL', 'GLW', 'PHO', 'PALL']
 dfb = DataframeBuilder(datasets, date_range)
 print(dfb.dataframe)
