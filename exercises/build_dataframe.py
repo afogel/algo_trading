@@ -31,6 +31,19 @@ class DataframeBuilder:
 		temp_df = temp_df.rename(columns={column: symbol})
 		self.dataframe = self.dataframe.join(temp_df, how='inner')
 
+class DataframePlotter:
+	'Plots a dataframe; accepts options for naming and normalizing'
+
+	def __init__(self, dataframe, label_dict = {}, normalize = True):
+		self.dataframe = dataframe
+		self.title = label_dict['title']
+		self.xlabel = label_dict['xlabel']
+		self.ylabel = label_dict['ylabel']
+		self.normalize = normalize
+
+	def plot():
+		pass
+
 date_range = ['01/01/2015', '01/16/2018']
 datasets = ['SPY', 'GLW', 'PHO', 'PALL', 'CEF']
 dataframe = DataframeBuilder(datasets, date_range).build()
