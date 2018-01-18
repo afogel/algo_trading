@@ -41,11 +41,10 @@ class DataframePlotter:
 	'Plots a dataframe; accepts options for naming and normalizing'
 
 	def __init__(self, dataframe, label_dict = {}, normalize = True):
-		self.dataframe = dataframe
+		self.dataframe = self._normalize(dataframe) if normalize else dataframe
 		self.title = label_dict.get('title', 'Stock Prices')
 		self.xlabel = label_dict.get('xlabel', None)
 		self.ylabel = label_dict.get('ylabel', None)
-		self.normalize = normalize
 
 	def plot(self):
 		axes = self.dataframe.plot(fontsize=12)
@@ -56,6 +55,9 @@ class DataframePlotter:
 		axes.set_title(self.title)
 		axes.set_xlabel(self.xlabel) if self.xlabel else False
 		axes.set_ylabel(self.ylabel) if self.ylabel else False
+
+	def _normalize(self, dataframe):
+		return dataframe / dataframe.ix[0,:]
 
 
 date_range = ['01/01/2015', '01/16/2018']
