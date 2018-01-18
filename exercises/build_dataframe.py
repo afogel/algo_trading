@@ -47,5 +47,6 @@ class DataframePlotter:
 date_range = ['01/01/2015', '01/16/2018']
 datasets = ['SPY', 'GLW', 'PHO', 'PALL', 'CEF']
 dataframe = DataframeBuilder(datasets, date_range).build()
-print(dataframe)
+dfp = DataframePlotter(dataframe)
+print(dfp.title)
 
