@@ -34,14 +34,14 @@ class DataframeBuilder:
 class DataframePlotter:
 	'Plots a dataframe; accepts options for naming and normalizing'
 
-	def __init__(self, dataframe, label_dict = {}, normalize = True):
+	def __init__(self, dataframe, label_dict = dict(), normalize = True):
 		self.dataframe = dataframe
-		self.title = label_dict['title']
-		self.xlabel = label_dict['xlabel']
-		self.ylabel = label_dict['ylabel']
+		self.title = label_dict.get('title', None)
+		self.xlabel = label_dict.get('xlabel', None)
+		self.ylabel = label_dict.get('ylabel', None)
 		self.normalize = normalize
 
-	def plot():
+	def plot(self):
 		pass
 
 date_range = ['01/01/2015', '01/16/2018']
