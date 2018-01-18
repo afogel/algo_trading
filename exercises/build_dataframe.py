@@ -8,8 +8,13 @@ class DataframeBuilder:
 	def __init__(self, datasets, daterange, column='Adj Close'):
 		_daterange = self._parse_daterange(daterange)
 		self.dataframe = pd.DataFrame(index=_daterange)
-		for stock_symbol in datasets:
-			self._add_dataset_to_dataframe(stock_symbol, column)
+		self.datasets = datasets
+		self.column = column
+
+	def build(self):
+		for stock_symbol in self.datasets:
+			self._add_dataset_to_dataframe(stock_symbol, self.column)
+		return self.dataframe
 
 	def _parse_daterange(self, daterange):
 		start_date_string, end_date_string = daterange[0], daterange[1]
@@ -28,6 +33,6 @@ class DataframeBuilder:
 
 date_range = ['01/01/2015', '01/16/2018']
 datasets = ['SPY', 'GLW', 'PHO', 'PALL', 'CEF']
-dfb = DataframeBuilder(datasets, date_range)
-print(dfb.dataframe)
+dataframe = DataframeBuilder(datasets, date_range).build()
+print(dataframe)
 
