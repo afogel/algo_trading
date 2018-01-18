@@ -26,17 +26,22 @@ class DataframeBuilder:
 			return pd.date_range(start_date_string, end_date_string)
 
 	def _add_dataset_to_dataframe(self, symbol, column):
-		temp_df = pd.read_csv("../data/{}.csv".format(symbol), index_col='Date',
-			parse_dates=True, usecols=['Date', column], na_values=['nan'])
+		temp_df = pd.read_csv(
+			"../data/{}.csv".format(symbol),
+			index_col='Date',
+			parse_dates=True,
+			usecols=['Date', column],
+			na_values=['nan']
+		)
 		temp_df = temp_df.rename(columns={column: symbol})
 		self.dataframe = self.dataframe.join(temp_df, how='inner')
 
 class DataframePlotter:
 	'Plots a dataframe; accepts options for naming and normalizing'
 
-	def __init__(self, dataframe, label_dict = dict(), normalize = True):
+	def __init__(self, dataframe, label_dict = {}, normalize = True):
 		self.dataframe = dataframe
-		self.title = label_dict.get('title', None)
+		self.title = label_dict.get('title', 'Stock Prices')
 		self.xlabel = label_dict.get('xlabel', None)
 		self.ylabel = label_dict.get('ylabel', None)
 		self.normalize = normalize
