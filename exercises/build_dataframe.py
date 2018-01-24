@@ -60,7 +60,7 @@ class DataframePlotter:
 		return dataframe / dataframe.ix[0,:]
 
 
-date_range = ['01/01/2015', '01/16/2018']
+date_range = ['12/01/2017', '01/16/2018']
 datasets = ['SPY', 'GLW', 'PHO', 'PALL', 'CEF']
 dataframe = DataframeBuilder(datasets, date_range).build()
 plot_labels = {'xlabel': 'Dates', 'ylabel': 'Price'}
