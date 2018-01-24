@@ -35,36 +35,3 @@ class DataframeBuilder:
 		)
 		temp_df = temp_df.rename(columns={column: symbol})
 		self.dataframe = self.dataframe.join(temp_df, how='inner')
-
-import matplotlib.pyplot as plot
-class DataframePlotter:
-	'Plots a dataframe; accepts options for naming and normalizing'
-
-	def __init__(self, dataframe, label_dict = {}, normalize = True):
-		self.dataframe = self._normalize(dataframe) if normalize else dataframe
-		self.title = label_dict.get('title', 'Stock Prices')
-		self.xlabel = label_dict.get('xlabel', None)
-		self.ylabel = label_dict.get('ylabel', None)
-
-	def plot(self):
-		axes = self.dataframe.plot(fontsize=12)
-		self._label_axes(axes)
-		plot.show()
-
-	def _label_axes(self, axes):
-		axes.set_title(self.title)
-		axes.set_xlabel(self.xlabel) if self.xlabel else False
-		axes.set_ylabel(self.ylabel) if self.ylabel else False
-
-	def _normalize(self, dataframe):
-		return dataframe / dataframe.ix[0,:]
-
-
-date_range = ['12/01/2017', '01/16/2018']
-datasets = ['SPY', 'GLW', 'PHO', 'PALL', 'CEF']
-dataframe = DataframeBuilder(datasets, date_range).build()
-plot_labels = {'xlabel': 'Dates', 'ylabel': 'Price'}
-dfp = DataframePlotter(dataframe, plot_labels).plot()
-# print(dfp.title)
-# print(dataframe)
-
